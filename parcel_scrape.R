@@ -32,7 +32,6 @@ fetch_boston <- function(grid_dims, out_path){
       return(box_return)
     })
   
-  
   print("Row-binding query results, and removing duplicates...")
   bos_parcels %>% 
     do.call(rbind, .) %>%
