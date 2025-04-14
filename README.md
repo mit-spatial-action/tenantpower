@@ -1,6 +1,6 @@
 # Mapping Landlords
 
-⛔️ DEPRECATED ⛔️ (`2025-04-14`) Deduplication workflow for tenantpower.org, developed with MAMAS. 
+⛔️ DEPRECATED/SUPERCEDED ⛔️ by development on [who-owns-mass-frontend](https://github.com/mit-spatial-action/who-owns-mass-frontend) from [@mit-spatial-action](https://github.com/mit-spatial-action). (2025-04-14)
 
 Mutual Aid Medford and Somerville Landlord Mapping Project
 
