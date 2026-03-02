@@ -56,8 +56,25 @@
             new MapboxGeocoder({
                 accessToken: PUBLIC_MB_TOKEN,
                 useBrowserFocus: true,
-                mapboxgl: mapboxgl as any
-            })
+                mapboxgl: mapboxgl as any,
+                types: 'address',
+                countries: 'us',
+                bbox: [
+                    -73.507239199792,
+                    41.23908260581605,
+                    -69.92871308883089,
+                    42.88675909238091
+                ],
+                filter: (item) => {
+                    return item.context.some((i) => {
+                        return (
+                            i.id.split('.').shift() === 'region' &&
+                            i.text === 'Massachusetts'
+                        );
+                    });
+                }
+            }),
+            'top-left'
         );
     });
 
