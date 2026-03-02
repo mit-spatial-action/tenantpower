@@ -7,6 +7,7 @@
     import '@mapbox/mapbox-gl-geocoder/dist/mapbox-gl-geocoder.css';
 
     import { PUBLIC_MB_TOKEN } from '$env/static/public';
+    import { appState } from '$lib/state.svelte';
 
     let map: mapboxgl.Map | undefined;
     let mapContainer: HTMLDivElement;
@@ -76,6 +77,10 @@
             }),
             'top-left'
         );
+        
+        map.once("idle", () => {
+            appState.loading = false;
+        });
     });
 
     onDestroy(() => {
