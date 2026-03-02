@@ -62,23 +62,25 @@
             dragRotate: false
         });
 
+        const geocoder = new MapboxGeocoder({
+            accessToken: PUBLIC_MB_TOKEN,
+            useBrowserFocus: true,
+            mapboxgl: mapboxgl as any,
+            types: 'address',
+            countries: 'us',
+            bbox: bbox,
+            filter: (item) => {
+                return item.context.some((i) => {
+                    return (
+                        i.id.split('.').shift() === 'region' &&
+                        i.text === 'Massachusetts'
+                    );
+                });
+            }
+        });
+
         map.addControl(
-            new MapboxGeocoder({
-                accessToken: PUBLIC_MB_TOKEN,
-                useBrowserFocus: true,
-                mapboxgl: mapboxgl as any,
-                types: 'address',
-                countries: 'us',
-                bbox: bbox,
-                filter: (item) => {
-                    return item.context.some((i) => {
-                        return (
-                            i.id.split('.').shift() === 'region' &&
-                            i.text === 'Massachusetts'
-                        );
-                    });
-                }
-            }),
+            geocoder,
             'top-left'
         );
         
@@ -97,6 +99,15 @@
                     'line-width': 2,
                     'line-blur': 0.5
                 }
+            });
+
+            geocoder.on('result', async (e) => {
+                const coords = e.result.geometry.coordinates
+                const apiUrl = "api/props_by_loc/"
+                const query = `${apiUrl}?lng=${coords[0]}&lat=${coords[1]}&n=1`;
+                let results = await fetch(query);
+                let test = await results.text();
+                console.log(test);
             });
         });
 
