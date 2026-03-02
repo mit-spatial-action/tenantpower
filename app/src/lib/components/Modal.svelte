@@ -6,7 +6,7 @@
 
 {#if active}
     <div class="modal is-active" transition:fade={{ duration: 200 }}>
-        <div class="modal-background" onclick={close}></div>
+        <div class="modal-background"></div>
         {@render children?.(close)}
     </div>
 {/if}
