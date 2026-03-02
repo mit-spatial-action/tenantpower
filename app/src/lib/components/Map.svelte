@@ -23,6 +23,15 @@
         [-70.86884578454921, 42.45345337436338]
     )
     const boundsNorm = mapboxgl.LngLatBounds.convert(bounds);
+
+    const boundsArray = boundsNorm.toArray()
+
+    const bbox: [number, number, number, number] = [
+        boundsArray[0][0],
+        boundsArray[0][1],
+        boundsArray[1][0],
+        boundsArray[1][1]
+    ]
     const xMargin = Math.abs(boundsNorm.getWest() - boundsNorm.getEast()) * 0.2;
     const yMargin = Math.abs(boundsNorm.getNorth() - boundsNorm.getSouth()) * 0.2;
 
@@ -60,12 +69,7 @@
                 mapboxgl: mapboxgl as any,
                 types: 'address',
                 countries: 'us',
-                bbox: [
-                    -73.507239199792,
-                    41.23908260581605,
-                    -69.92871308883089,
-                    42.88675909238091
-                ],
+                bbox: bbox,
                 filter: (item) => {
                     return item.context.some((i) => {
                         return (
