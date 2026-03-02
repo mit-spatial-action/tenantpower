@@ -13,3 +13,9 @@ updates:
     directory: "/app/" # Location of package manifests
     schedule:
       interval: "weekly"
+  - package-ecosystem: "pip"
+    directory: "/" 
+    schedule:
+      interval: "weekly"
+    exclude-paths:
+      - "pipelines/**"
