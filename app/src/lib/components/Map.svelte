@@ -12,17 +12,23 @@
     let mapContainer: HTMLDivElement;
 
     interface MapState {
-        lng: number;
-        lat: number;
         zoom: number;
         style: string;
+        bounds: mapboxgl.LngLatBoundsLike
     };
 
-     const initialState: MapState = { 
-        lng: -71.224518, 
-        lat: 42.213995, 
+    const bounds = new mapboxgl.LngLatBounds(
+        [-71.1912506475513, 42.22791953938691], 
+        [-70.86884578454921, 42.45345337436338]
+    )
+    const boundsNorm = mapboxgl.LngLatBounds.convert(bounds);
+    const xMargin = Math.abs(boundsNorm.getWest() - boundsNorm.getEast()) * 0.2;
+    const yMargin = Math.abs(boundsNorm.getNorth() - boundsNorm.getSouth()) * 0.2;
+
+    const initialState: MapState = {
         zoom: 9, 
-        style: "mapbox://styles/mit-spatial-action/cmd4tea3k009701s25hl6hr5y" 
+        style: "mapbox://styles/mit-spatial-action/cmd4tea3k009701s25hl6hr5y" ,
+        bounds: bounds
     };
 
     onMount(() => {
@@ -30,8 +36,20 @@
             container: mapContainer,
             accessToken: PUBLIC_MB_TOKEN,
             style: initialState.style,
-            center: [initialState.lng, initialState.lat],
-            zoom: initialState.zoom
+            bounds: initialState.bounds,
+            maxBounds: new mapboxgl.LngLatBounds(
+                [
+                    boundsNorm.getWest() - xMargin, 
+                    boundsNorm.getSouth() - yMargin,
+                ], [
+                    boundsNorm.getEast() + xMargin, 
+                    boundsNorm.getNorth() + yMargin
+                ]
+            ),
+            maxZoom: 21,
+            minZoom: 11,
+            pitchWithRotate: false,
+            dragRotate: false
         });
 
         map.addControl(
