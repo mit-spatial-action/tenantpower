@@ -1,0 +1,13 @@
+$red: #FF0000;
+
+@use "bulma/sass" with (
+  $family-primary: "'Overpass Variable', sans-serif",
+  $family-monospace: "'Overpass Mono Variable', monospace",
+  $link: $red,
+  $primary: $red,
+  $radius: 0,
+  $radius-small: 0,
+  $radius-medium: 0,
+  $radius-large: 0,
+  $radius-rounded: 0
+);
