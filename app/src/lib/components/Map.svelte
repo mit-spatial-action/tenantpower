@@ -78,6 +78,24 @@
             'top-left'
         );
         
+        map.on('load', () => {
+            map && map.addSource('bounds-source', {
+                type: 'geojson',
+                data: '/data/bounds.geojson' 
+            });
+
+            map && map.addLayer({
+                id: 'bounds',
+                type: 'line',
+                source: 'bounds-source',
+                paint: {
+                    'line-color': 'white',
+                    'line-width': 2,
+                    'line-blur': 0.5
+                }
+            });
+        });
+
         map.once("idle", () => {
             appState.loading = false;
         });
