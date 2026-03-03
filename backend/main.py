@@ -1,14 +1,28 @@
 import os
 import json
 from typing import Annotated
-from fastapi import FastAPI, Response, Path, Query
+from fastapi import FastAPI, APIRouter, Response, Path, Query
 import asyncpg
 
-app = FastAPI(root_path="/tenantpower")
+TITLE = "Tenant Power API"
+VERSION = "1.0.0"
+ROOT_PATH = "/tenantpower"
+
+app = FastAPI(title=TITLE, version=VERSION, root_path=ROOT_PATH)
+
+v1 = APIRouter(prefix="/v1", tags=["v1"])
 
 DB_CONFIG=f"postgresql://{os.getenv("DB_USER")}:{os.getenv("DB_PASS")}@{os.getenv("DB_HOST")}:{os.getenv("DB_PORT")}/{os.getenv("DB_NAME")}"
 
-@app.get("/clusters/{id}")
+async def get_system_status(conn: asyncpg.Connection):
+    try:
+        await conn.fetchval("SELECT 1")
+        return "running"
+    except Exception as e:
+        return str(e)
+
+
+@v1.get("/clusters/{id}")
 async def get_clusters(
     id: Annotated[int, Path(title="The ID of the cluster to filter by")]
 ):
@@ -42,7 +56,7 @@ async def get_clusters(
     finally:
         await conn.close()
 
-@app.get("/props/{id}")
+@v1.get("/props/{id}")
 async def get_props(
     id: Annotated[int, Path(title="The ID of the property.")],
     bare: Annotated[bool, Query()]
@@ -78,7 +92,7 @@ async def get_props(
     finally:
         await conn.close()
 
-@app.get("/props_by_loc/")
+@v1.get("/props_by_loc/")
 async def get_props_by_loc(
     lat: Annotated[float, Query(gt=-90, lt=90)],
     lng: Annotated[float, Query(gt=-180, lt=180)],
@@ -112,3 +126,20 @@ async def get_props_by_loc(
     
     finally:
         await conn.close()
+
+app.include_router(v1)
+
+@app.get("/")
+async def get_root():
+    conn = await asyncpg.connect(DB_CONFIG)
+    status = await get_system_status(conn)
+    return {
+        "app": TITLE,
+        "version": VERSION,
+        "status": status,
+        "links": {
+            "swagger_ui": os.path.join(ROOT_PATH, "/docs"),
+            "redoc": os.path.join(ROOT_PATH, "/redoc"),
+            "openapi_spec": app.openapi_url 
+        }
+    }
