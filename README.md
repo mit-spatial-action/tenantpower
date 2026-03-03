@@ -1,6 +1,8 @@
 # Tenant Power
 
-[![Deploy Workflow](https://github.com/mit-spatial-action/tenantpower.org/actions/workflows/deploy.yml/badge.svg)](https://github.com/mit-spatial-action/tenantpower.org/actions/workflows/deploy.yml) [![Netlify Status](https://api.netlify.com/api/v1/badges/b0c5c95a-e249-4527-85e1-02659b27a62a/deploy-status)](https://app.netlify.com/projects/tenantpower/deploys) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive)
+[![Deploy Workflow](https://github.com/mit-spatial-action/tenantpower.org/actions/workflows/deploy.yml/badge.svg)](https://github.com/mit-spatial-action/tenantpower.org/actions/workflows/deploy.yml) [![Netlify Status](https://api.netlify.com/api/v1/badges/b0c5c95a-e249-4527-85e1-02659b27a62a/deploy-status)](https://app.netlify.com/projects/tenantpower/deploys) [![License: GPL v3](https://img.shields.io/badge/License-GPL%20v3-blue.svg)](https://www.gnu.org/licenses/gpl-3.0) [![Project Status: Inactive – The project has reached a stable, usable state but is no longer being actively developed; support/maintenance will be provided as time allows.](https://www.repostatus.org/badges/latest/inactive.svg)](https://www.repostatus.org/#inactive) [![DOI](https://zenodo.org/badge/892278566.svg)](https://doi.org/10.5281/zenodo.18851602)
+
+
 
 Monorepo for Tenant Power application, no longer under development but maintained for archival purposes. Superceded by [who-owns-mass-frontend](https://github.com/mit-spatial-action/who-owns-mass-frontend) from [mit-spatial-action](https://github.com/mit-spatial-action). 
 
