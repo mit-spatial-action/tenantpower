@@ -1,13 +1,25 @@
 <script lang="ts">
-	import favicon from '$lib/assets/favicon.svg';
-	import '@fontsource-variable/overpass';
-	import '@fontsource-variable/overpass-mono';
-	import '$lib/styles/global.scss';
-	let { children } = $props();
+  import favicon from "$lib/assets/favicon.ico";
+  import favicon32 from "$lib/assets/favicon_32x32.png";
+  import favicon192 from "$lib/assets/favicon_192x192.png";
+  // import SvelteSeo from "svelte-seo";
+  import "@fontsource-variable/overpass";
+  import "@fontsource-variable/overpass-mono";
+
+  import _config from "$lib/config.json";
+  import { ConfigSchema, type Config } from "$lib/config";
+  const result = ConfigSchema.safeParse(_config);
+  const config: Config = result.data!;
+
+  import "$lib/styles/global.scss";
+  let { children } = $props();
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+  <link rel="icon" href={favicon} type="image/x-icon" sizes="16x16" />
+  <link rel="icon" href={favicon32} type="image/png" sizes="32x32" />
+  <link rel="icon" href={favicon192} type="image/png" sizes="192x192" />
+  <link rel="apple-touch-icon" href={favicon192} sizes="192x192" />
 </svelte:head>
 
 {@render children()}
