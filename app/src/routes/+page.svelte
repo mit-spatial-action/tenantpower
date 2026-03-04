@@ -3,6 +3,9 @@
     import ModalCard from "$lib/components/ModalCard.svelte";
     import Modal from "$lib/components/Modal.svelte";
     import Spinner from "$lib/components/Spinner.svelte";
+    import { config } from "$lib/config";
+    const { title } = config;
+
     let infoModal = $state(true);
 </script>
 
@@ -11,7 +14,7 @@
 {/if}
 <Modal bind:active={infoModal}>
     {#snippet children(close: () => void)}
-    <ModalCard title="Tenant Power" onclose={close}>
+    <ModalCard title={title} onclose={close}>
         <div class="block">
             <article class="message is-primary">
                 <div class="message-header">
