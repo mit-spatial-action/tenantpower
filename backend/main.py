@@ -100,7 +100,7 @@ async def get_clusters(
 @v1.get("/props/{id}")
 async def get_props(
     id: Annotated[int, Path(title="The ID of the property.")],
-    bare: Annotated[bool, Query()],
+    bare: Annotated[bool, Query()] = False,
 ):
     conn = await asyncpg.connect(settings.db_url)
     cols = "id, clst, geometry" if bare else "*"
@@ -139,7 +139,7 @@ async def get_props_by_loc(
     lat: Annotated[float, Query(gt=-90, lt=90)],
     lng: Annotated[float, Query(gt=-180, lt=180)],
     n: Annotated[int, Query(gt=0)],
-    bare: Annotated[bool, Query()],
+    bare: Annotated[bool, Query()] = False,
 ):
     conn = await asyncpg.connect(settings.db_url)
     cols = "id, clst, geometry" if bare else "*"
