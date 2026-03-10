@@ -34,7 +34,7 @@ jobs:
             uv sync --frozen &&
 
             # Restart Services
-            sudo -n systemctl restart tenantpower &&
             sudo -n systemctl daemon-reload &&
+            sudo -n systemctl restart tenantpower &&
             sudo -n systemctl restart nginx
           EOF
