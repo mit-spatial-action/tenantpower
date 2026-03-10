@@ -4,7 +4,10 @@
   import favicon192 from "$lib/assets/favicon_192x192.png";
   import SvelteSeo from "svelte-seo";
   import "@fontsource-variable/overpass";
-  import "@fontsource-variable/overpass-mono";
+  import "iconify-icon";
+  import { page, navigating } from '$app/state';
+  import Overlay from "$lib/components/Overlay.svelte";
+  import Spinner from "$lib/components/Spinner.svelte";
   import Map from "$lib/components/Map.svelte";
   import type { Config } from "$lib/schemas/instance";
 
@@ -34,6 +37,11 @@
   <link rel="apple-touch-icon" href={favicon192} sizes="192x192" />
 </svelte:head>
 
+
+{#if navigating.to}
+  <Spinner/>
+{/if}
+
 <SvelteSeo
   {title}
   {description}
@@ -50,7 +58,9 @@
 />
 
 <Map/>
-{@render children()}
+<Overlay>
+  {@render children()}
+</Overlay>
 
 <style>
   :global(body) {

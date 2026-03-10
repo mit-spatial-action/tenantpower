@@ -1,3 +1,4 @@
 export const appState = $state({
-    loading: true
+    loading: true,
+    selected: {}
 });

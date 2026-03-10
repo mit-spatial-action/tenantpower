@@ -1,7 +1,8 @@
 <script lang="ts">
     import mapboxgl from "mapbox-gl";
     import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
-    import type { Feature, FeatureCollection } from 'geojson';
+    import type { FeatureCollection } from 'geojson';
+    import type { GeoJSONSource } from 'mapbox-gl';
     import { onMount, onDestroy } from "svelte";
     
     import "mapbox-gl/dist/mapbox-gl.css";
@@ -43,6 +44,24 @@
         style: "mapbox://styles/mit-spatial-action/cmd4tea3k009701s25hl6hr5y",
         bounds: bounds,
     };
+
+    $effect(() => {
+        const data = $state.snapshot(appState.selected) as FeatureCollection;
+        if (map && data && map.isStyleLoaded()) {
+            // map?.flyTo({
+            //     center: [
+            //         data.features[0].properties?.lon,
+            //         data.features[0].properties?.lat
+            //     ],
+            //     zoom: 18
+            // })
+            const source = map.getSource('parcels-fill-source') as GeoJSONSource;
+            if (source) {
+                console.log(data);
+                source.setData(data);
+            }
+        }
+    });
 
     onMount(() => {
         map = new mapboxgl.Map({
