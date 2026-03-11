@@ -44,7 +44,7 @@
 
 			<div class="field is-grouped is-grouped-multiline">
                 {@render tag("Year", prop.year)}
-                {@render tag("Value", prop.ass_val)}
+                {@render tag("Value", USDollar.format(prop.ass_val))}
                 {@render tag("Sale Price", USDollar.format(prop.sale_p))}
                 {@render tag("Sale Date", new Date(prop.sale_d).toLocaleDateString('en-US'))}
 				<span class="tag is-primary has-text-weight-bold">

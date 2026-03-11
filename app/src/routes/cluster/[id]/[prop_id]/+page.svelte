@@ -4,13 +4,15 @@
     import type { FeatureCollection } from "geojson";
     import type { PageProps } from "./$types";
 
-    let { data }: PageProps = $props();
+    let { data }: PageProps & { data: FeatureCollection } = $props();
 
     $effect(() => {
         if (data) {
-            appState.selected = data as FeatureCollection;
+            appState.selected = data;
         }
     });
 </script>
 
-<PropertyCard feature={data.features[0]} />
+{#if data?.features?.length}
+    <PropertyCard feature={data.features[0]} />
+{/if}

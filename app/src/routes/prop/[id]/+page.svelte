@@ -4,11 +4,13 @@
     import PropertyCard from '$lib/components/PropertyCard.svelte';
     import type { FeatureCollection } from 'geojson';
 
-	let { data }: PageProps = $props();
+	let { data }: PageProps & { data: FeatureCollection } = $props();
 
     $effect(() => {
-		appState.selected = data as FeatureCollection;
+		appState.selected = data;
 	});
 </script>
 
-<PropertyCard feature={data.features[0]} />
+{#if data?.features?.length}
+    <PropertyCard feature={data.features[0]} />
+{/if}
