@@ -1,10 +1,10 @@
 import type { FeatureCollection } from 'geojson';
 
-class AppState {
-    selected = $state<FeatureCollection | null>(null);
-}
-
-export const appState: AppState = $state({
-    loading: true,
-    selected: null
+export const appState = $state({
+    isGeocoding: false as boolean,
+    errors: {
+        geocode: false as boolean
+    },
+    isInit: true as boolean,
+    selected: null as FeatureCollection | null
 });

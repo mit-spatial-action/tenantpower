@@ -2,7 +2,7 @@
     let { children } = $props();
 </script>
 <section class="overlay">
-    <div class="columns mt-6">
+    <div class="columns mt-1">
         <div class="column is-one-third">
             {@render children?.()}
         </div>
@@ -15,7 +15,7 @@
         pointer-events: none; 
     }
     .columns > * {
-        pointer-events: auto; /* Re-enables clicking for the actual menu content */
+        pointer-events: auto;
         height: 100%;
     }
 </style>

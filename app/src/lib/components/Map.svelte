@@ -114,7 +114,7 @@
             },
         });
 
-        map.addControl(geocoder, "top-left");
+        geocoder.addTo('#geocoder');
 
         map.on("load", () => {
             if (map) {
@@ -180,7 +180,9 @@
                         'fill-color': 'red',
                         'fill-opacity': 1.0
                     }
-                });
+                },
+                'building'
+                );
 
                 map.addLayer({ 
                     id: 'parcels-stroke', 
@@ -190,7 +192,9 @@
                         'line-color': 'white',
                         'line-width': 3
                     }
-                });
+                },
+                'building'
+                );
 
                 map.addInteraction('parcel-points-mouseenter', {
                     type: 'mouseenter',
@@ -218,26 +222,32 @@
             }
 
             geocoder.on("result", async (e) => {
-                appState.loading = true;
-                const coords = e.result.geometry.coordinates;
-                const response = await fetch(`/props_by_loc/${coords[0]}/${coords[1]}/1`);
-                appState.loading = false;
-                const results: FeatureCollection = await response.json();
-                if (results.features && results.features.length > 0) {
-                    const selected = results.features.filter(f => {
-                        return f.properties?.prop_addr?.split(' ')[0] === e.result.address;
-                    })
-                    if (selected.length > 0) {
-                        goto('/prop/' + selected[0].properties?.id);
-                    } else {
-                        appState.loading = false;
-                    }
-                }
-            });
-        });
+                appState.isGeocoding = true;
+                appState.errors.geocode = false;
 
-        map.once("idle", () => {
-            appState.loading = false;
+                const [lng, lat] = e.result.geometry.coordinates;
+                const response = await fetch(`/props_by_loc/${lng}/${lat}/1`);
+                const results: FeatureCollection = await response.json();
+
+                appState.isGeocoding = false;
+
+                const features = results?.features || [];
+                if (features.length === 0) {
+                    appState.errors.geocode = true;
+                    return;
+                }
+
+                const selected = features.find(f => 
+                    f.properties?.prop_addr?.split(' ')[0] === e.result.address
+                );
+                
+                if (!selected) {
+                    appState.errors.geocode = true;
+                    return;
+                }
+
+                goto(`/prop/${selected.properties?.id}`);
+            });
         });
     });
 

@@ -2,22 +2,9 @@
 	import type { PageProps } from './$types';
     import { appState } from '$lib/state.svelte';
     import { fly } from 'svelte/transition';
-    import { navigating } from '$app/state';
-    import Spinner from '$lib/components/Spinner.svelte';
     import type { FeatureCollection } from 'geojson';
 
 	let { data }: PageProps = $props();
-
-    interface ParcelProperties {
-        ass_val: number | null;
-        prop_addr: string;
-        year: number;
-        clst: number;
-        town: string;
-        lon: number;
-        lat: number;
-        [key: string]: any;
-    }
     
     $effect(() => {
 		appState.selected = data as FeatureCollection;
@@ -41,12 +28,8 @@
     }
 </script>
 
-{#if navigating}
-    <Spinner/>
-{/if}
-
 {#if prop}
-<div transition:fly={{ x: -200, duration: 200 }} class="box mx-2 mt-2">
+<div transition:fly={{ x: -200, duration: 200 }} class="bordered box mx-2 mt-2">
     <div class="block has-background-primary p-3">
         <h1 class="title has-text-white">{prop.prop_addr}</h1>
         <h2 class="subtitle has-text-white">{muniExpand(prop.town)}</h2>
