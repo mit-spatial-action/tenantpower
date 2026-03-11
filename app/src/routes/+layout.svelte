@@ -52,6 +52,23 @@
 
 <Map/>
 <Overlay>
+  <div class="bordered mx-2">
+    <nav class="navbar" aria-label="main navigation">
+      <div class="navbar-brand">
+        <a class="navbar-item mt-2" href={canonical}>
+          <h1 class="title">{title}</h1>
+        </a>
+      </div>
+      <div class="navbar-end">
+        <div class="navbar-item">
+          <div class="buttons">
+            <a class="button is-primary is-medium is-responsive" href="/about/">About</a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    <Geocoder />
+  </div>
   {@render children()}
 </Overlay>
 
