@@ -2,7 +2,7 @@
     let { children } = $props();
 </script>
 <section class="overlay">
-    <div class="columns mt-1">
+    <div class="columns">
         <div class="column is-one-third">
             {@render children?.()}
         </div>
@@ -16,6 +16,6 @@
     }
     .columns > * {
         pointer-events: auto;
-        height: 100%;
+        height: 100vh;
     }
 </style>

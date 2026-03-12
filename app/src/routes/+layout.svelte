@@ -7,10 +7,13 @@
   import Overlay from "$lib/components/Overlay.svelte";
   import Spinner from "$lib/components/Spinner.svelte";
   import Map from "$lib/components/Map.svelte";
-  import { appState } from "$lib/state.svelte";
+  import type { Component } from 'svelte';
   import type { Config } from "$lib/schemas/instance";
-  import InitWarning from "$lib/components/InitWarning.svelte";
+  import Modal from "$lib/components/Modal.svelte";
   import Geocoder from "$lib/components/Geocoder.svelte";
+  import { navigating } from '$app/state';
+  import { appState } from '$lib/state.svelte';
+  import { modalState } from '$lib/state.svelte';
   let { children } = $props();
 
   import "$lib/styles/global.scss";
@@ -27,7 +30,9 @@
     url: assetFiles[`/src/lib/assets/${img.url}`],
   })) as Config["images"];
 
-  let kw = keywords.join(",");
+  let isBusy = $derived(navigating.to !== null || appState.isGeocoding);
+
+  modalState.open('warning')
 </script>
 
 <svelte:head>
@@ -41,7 +46,7 @@
   {title}
   {description}
   {canonical}
-  keywords={kw}
+  keywords={keywords.join(",")}
   openGraph={{
     title: title,
     description: description,
@@ -52,12 +57,20 @@
   }}
 />
 
-<Spinner />
 <Map />
 
-<InitWarning />
+<Modal 
+  spinning={isBusy} 
+  isOpen={modalState.isOpen} 
+  close={() => modalState.close()}
+>
+  {#if modalState.component}
+    <modalState.component />
+  {/if}
+</Modal>
+
 <Overlay>
-  <div class="bordered mx-2">
+  <div class="bordered mx-2 mt-2">
     <nav class="navbar" aria-label="main navigation">
       <div class="navbar-brand">
         <a class="navbar-item mt-2" href={canonical}>
@@ -67,7 +80,10 @@
       <div class="navbar-end">
         <div class="navbar-item">
           <div class="buttons">
-            <a class="button is-primary is-normal is-responsive" href="/about/">About</a>
+            <button
+              class="button is-primary is-normal is-responsive"
+              onclick={() => modalState.open('about')}>About</button
+            >
           </div>
         </div>
       </div>

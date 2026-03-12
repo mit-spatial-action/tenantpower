@@ -2,7 +2,6 @@
     import mapboxgl from "mapbox-gl";
     import MapboxGeocoder from "@mapbox/mapbox-gl-geocoder";
     import type { FeatureCollection } from "geojson";
-    import type { EasingOptions, GeoJSONSource } from "mapbox-gl";
     import { onMount, onDestroy } from "svelte";
 
     import "mapbox-gl/dist/mapbox-gl.css";
@@ -158,10 +157,14 @@
                 });
 
                 map.addLayer({
-                    id: "parcel-points",
+                    id: "parcels-points",
                     type: "circle",
                     source: "parcels-points-source",
                     "source-layer": "tenantpower-cz585a",
+                    // filter: [
+                    //     '!',
+                    //     ['in', ['get', 'id'], ['literal', appState.selected?.features.map(f => f.id) || []]]
+                    // ],
                     paint: {
                         "circle-color": "white",
                         "circle-stroke-color": "red",
@@ -256,26 +259,52 @@
                     "building",
                 );
 
-                map.addInteraction("parcel-points-mouseenter", {
+                map.addInteraction("parcels-fill-mouseenter", {
                     type: "mouseenter",
-                    target: { layerId: "parcel-points" },
+                    target: { layerId: "parcels-fill" },
+                    handler: (e) => {
+                        appState.highlighted = Number(e.feature?.properties.id)
+                        if (map) map.getCanvas().style.cursor = "pointer";
+                    },
+                });
+
+                map.addInteraction("parcels-circle-mouseenter", {
+                    type: "mouseenter",
+                    target: { layerId: "parcels-circle" },
+                    handler: (e) => {
+                        appState.highlighted = Number(e.feature?.properties.id)
+                        if (map) map.getCanvas().style.cursor = "pointer";
+                    },
+                });
+
+                map.addInteraction("parcels-circle-mouseleave", {
+                    type: "mouseleave",
+                    target: { layerId: "parcels-circle" },
+                    handler: (e) => {
+                        if (map) map.getCanvas().style.cursor = "";
+                    },
+                });
+
+                map.addInteraction("parcels-points-mouseenter", {
+                    type: "mouseenter",
+                    target: { layerId: "parcels-points" },
                     handler: () => {
                         if (map)
                             map.getCanvas().style.cursor =
                                 map.getZoom() > 15 ? "pointer" : "";
                     },
                 });
-                map.addInteraction("parcel-points-mouseleave", {
+                map.addInteraction("parcels-points-mouseleave", {
                     type: "mouseleave",
-                    target: { layerId: "parcel-points" },
+                    target: { layerId: "parcels-points" },
                     handler: () => {
                         if (map) map.getCanvas().style.cursor = "";
                     },
                 });
 
-                map.addInteraction("parcel-points-click", {
+                map.addInteraction("parcels-points-click", {
                     type: "click",
-                    target: { layerId: "parcel-points" },
+                    target: { layerId: "parcels-points" },
                     handler: (e) => {
                         if (map)
                             map.getZoom() > 15 &&
@@ -325,7 +354,7 @@
 
 <style>
     .map {
-        position: absolute;
+        position: fixed;
         padding: 0;
         margin: 0;
         width: 100%;

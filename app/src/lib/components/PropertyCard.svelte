@@ -1,26 +1,11 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
+	import { USDollar, muniExpand } from '$lib/helpers/helpers';
 	import type { Feature } from 'geojson';
 
 	let { feature }: { feature: Feature } = $props();
 
 	const prop = $derived(feature?.properties ?? {});
-
-	const USDollar = new Intl.NumberFormat('en-US', {
-		style: 'currency',
-		currency: 'USD',
-		maximumFractionDigits: 0
-	});
-
-	const towns: Record<string, string> = {
-		som: 'Somerville',
-		bos: 'Boston',
-		med: 'Medford',
-		brk: 'Brookline',
-		cam: 'Cambridge'
-	};
-
-	const muniExpand = (abb: string) => `${towns[abb] ?? 'unknown'}, MA`;
 </script>
 
 {#snippet tag(label: string, value: string|number)}
