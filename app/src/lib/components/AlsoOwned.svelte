@@ -59,4 +59,7 @@
         background-color: var(--bulma-primary);
         color: white;
     }
+    .box:last-child {
+        margin-bottom: 1.5rem !important;
+    }
 </style>
