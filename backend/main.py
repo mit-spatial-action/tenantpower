@@ -71,7 +71,7 @@ async def get_clusters(
         query = """
             SELECT jsonb_build_object(
                 'type', 'FeatureCollection',
-                'features', jsonb_agg(features)
+                'features', jsonb_agg(feature)
             )
             FROM (
                 SELECT jsonb_build_object(
@@ -108,7 +108,7 @@ async def get_props(
         query = f"""
             SELECT jsonb_build_object(
                 'type', 'FeatureCollection',
-                'features', jsonb_agg(features)
+                'features', jsonb_agg(feature)
             )
             FROM (
                 SELECT jsonb_build_object(
