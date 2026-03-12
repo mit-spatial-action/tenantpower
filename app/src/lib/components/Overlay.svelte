@@ -3,7 +3,7 @@
 </script>
 <section class="overlay">
     <div class="columns">
-        <div class="column is-one-third">
+        <div class="overlay-column column is-one-third">
             {@render children?.()}
         </div>
     </div>
@@ -14,8 +14,7 @@
         width: 100%;
         pointer-events: none; 
     }
-    .columns > * {
+    :global(.overlay-column > *) {
         pointer-events: auto;
-        height: 100vh;
     }
 </style>
