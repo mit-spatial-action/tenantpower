@@ -5,15 +5,13 @@
   import SvelteSeo from "svelte-seo";
   import "@fontsource-variable/overpass";
   import Overlay from "$lib/components/Overlay.svelte";
-  import Spinner from "$lib/components/Spinner.svelte";
   import Map from "$lib/components/Map.svelte";
-  import type { Component } from 'svelte';
   import type { Config } from "$lib/schemas/instance";
   import Modal from "$lib/components/Modal.svelte";
   import Geocoder from "$lib/components/Geocoder.svelte";
-  import { navigating } from '$app/state';
-  import { appState } from '$lib/state.svelte';
-  import { modalState } from '$lib/state.svelte';
+  import { navigating } from "$app/state";
+  import { appState } from "$lib/state.svelte";
+  import { modalState } from "$lib/state.svelte";
   let { children } = $props();
 
   import "$lib/styles/global.scss";
@@ -32,7 +30,7 @@
 
   let isBusy = $derived(navigating.to !== null || appState.isGeocoding);
 
-  modalState.open('warning')
+  modalState.open("warning");
 </script>
 
 <svelte:head>
@@ -59,9 +57,9 @@
 
 <Map />
 
-<Modal 
-  spinning={isBusy} 
-  isOpen={modalState.isOpen} 
+<Modal
+  spinning={isBusy}
+  isOpen={modalState.isOpen}
   close={() => modalState.close()}
 >
   {#if modalState.component}
@@ -82,7 +80,7 @@
           <div class="buttons">
             <button
               class="button is-primary is-normal is-responsive"
-              onclick={() => modalState.open('about')}>About</button
+              onclick={() => modalState.open("about")}>About</button
             >
           </div>
         </div>
