@@ -17,7 +17,7 @@
 		"@mapbox/mapbox-gl-geocoder": "^5.1.2",
 		"@sveltejs/adapter-netlify": "^6.0.4",
 		"@sveltejs/kit": "^2.55.0",
-		"@sveltejs/vite-plugin-svelte": "^6.2.4",
+		"@sveltejs/vite-plugin-svelte": "^7.0.0",
 		"@turf/bbox": "^7.3.4",
 		"@types/geojson": "^7946.0.16",
 		"@types/mapbox__mapbox-gl-geocoder": "^5.1.1",
