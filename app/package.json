@@ -22,18 +22,18 @@
 		"@types/geojson": "^7946.0.16",
 		"@types/mapbox__mapbox-gl-geocoder": "^5.1.1",
 		"bulma": "^1.0.4",
-		"mapbox-gl": "^3.20.0",
+		"mapbox-gl": "^3.21.0",
 		"mdsvex": "^0.12.7",
 		"sass": "^1.98.0",
-		"svelte": "^5.53.7",
+		"svelte": "^5.55.1",
 		"svelte-check": "^4.4.5",
 		"svelte-loading-spinners": "^0.3.6",
 		"svelte-seo": "^2.0.0",
 		"typescript": "^5.9.3",
-		"vite": "^7.3.1",
+		"vite": "^7.3.2",
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
-		"netlify-cli": "^24.3.0"
+		"netlify-cli": "^24.6.2"
 	}
 }
