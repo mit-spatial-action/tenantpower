@@ -54,7 +54,7 @@ async def get_system_status(conn: asyncpg.Connection):
         await conn.fetchval("SELECT 1")
         return "running"
     except Exception as e:
-        return str(e)
+        return "internal error"
 
 
 app = FastAPI(title=TITLE, version=VERSION, root_path=ROOT_PATH)
