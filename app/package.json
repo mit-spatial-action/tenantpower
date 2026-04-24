@@ -25,7 +25,7 @@
 		"mapbox-gl": "^3.22.0",
 		"mdsvex": "^0.12.7",
 		"sass": "^1.99.0",
-		"svelte": "^5.55.4",
+		"svelte": "^5.55.5",
 		"svelte-check": "^4.4.6",
 		"svelte-loading-spinners": "^0.3.6",
 		"svelte-seo": "^2.0.0",
