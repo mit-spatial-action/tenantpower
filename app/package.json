@@ -16,7 +16,7 @@
 		"@fontsource-variable/overpass-mono": "^5.2.8",
 		"@mapbox/mapbox-gl-geocoder": "^5.1.2",
 		"@sveltejs/adapter-netlify": "^6.0.4",
-		"@sveltejs/kit": "^2.57.1",
+		"@sveltejs/kit": "^2.58.0",
 		"@sveltejs/vite-plugin-svelte": "^6.2.4",
 		"@turf/bbox": "^7.3.4",
 		"@types/geojson": "^7946.0.16",
@@ -29,11 +29,11 @@
 		"svelte-check": "^4.4.6",
 		"svelte-loading-spinners": "^0.3.6",
 		"svelte-seo": "^2.0.0",
-		"typescript": "^5.9.3",
+		"typescript": "^6.0.3",
 		"vite": "^7.3.2",
 		"zod": "^4.3.6"
 	},
 	"devDependencies": {
-		"netlify-cli": "^25.0.0"
+		"netlify-cli": "^25.5.0"
 	}
 }
