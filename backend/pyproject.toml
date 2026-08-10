@@ -9,6 +9,6 @@ dependencies = [
     "fastapi[standard]>=0.136.3",
     "gunicorn>=25.1.0",
     "pydantic-settings>=2.14.1",
-    "uvicorn>=0.46.0",
+    "uvicorn>=0.52.1",
     "uvicorn-worker>=0.4.0",
 ]
