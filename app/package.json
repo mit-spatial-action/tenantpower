@@ -23,7 +23,7 @@
 		"@types/mapbox__mapbox-gl-geocoder": "^5.1.1",
 		"bulma": "^1.0.4",
 		"mapbox-gl": "^3.23.1",
-		"mdsvex": "^0.12.7",
+		"mdsvex": "^0.12.8",
 		"node-gyp": "^12.4.0",
 		"sass": "^1.99.0",
 		"svelte": "^5.56.8",
