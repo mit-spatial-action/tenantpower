@@ -20,7 +20,7 @@
 		"@sveltejs/vite-plugin-svelte": "^7.3.0",
 		"@turf/bbox": "^7.3.5",
 		"@types/geojson": "^7946.0.16",
-		"@types/mapbox__mapbox-gl-geocoder": "^5.1.1",
+		"@types/mapbox__mapbox-gl-geocoder": "^5.1.2",
 		"bulma": "^1.0.4",
 		"mapbox-gl": "^3.28.1",
 		"mdsvex": "^0.12.8",
