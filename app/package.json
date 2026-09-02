@@ -30,7 +30,7 @@
 		"svelte-check": "^4.7.6",
 		"svelte-loading-spinners": "^0.3.6",
 		"svelte-seo": "^2.0.0",
-		"typescript": "^6.0.3",
+		"typescript": "^7.0.2",
 		"vite": "^8.2.1",
 		"zod": "^4.4.3"
 	},
