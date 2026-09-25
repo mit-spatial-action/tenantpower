@@ -43,7 +43,7 @@
 		"esbuild@0.28.1": true,
 		"fsevents@2.3.3": true,
 		"sharp@0.34.5": true,
-		"netlify-cli@27.1.2": true,
+		"netlify-cli@27.10.0": true,
 		"unix-dgram@2.0.7": true
 	}
 }
